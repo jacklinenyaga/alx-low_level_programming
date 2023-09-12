@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Check if $CFILE variable is set and the file exists
+if [ -z "$CFILE" ] || [ ! -f "$CFILE" ]; then
+    echo "CFILE variable is not set or the file does not exist."
+    exit 1
+fi
+
+# Extract the filename without extension
+filename=$(basename -- "$CFILE")
+filename_no_ext="${filename%.*}"
+
+# Generate the assembly code using gcc
+gcc -S -masm=intel "$CFILE" -o "${filename_no_ext}.s"
+
+# Check for successful assembly code generation
+if [ $? -eq 0 ]; then
+    echo "Assembly code has been successfully generated in ${filename_no_ext}.s"
+else
+    echo "Failed to generate the assembly code."
+fi
