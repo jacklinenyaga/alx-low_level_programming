@@ -16,9 +16,9 @@ int main(void)
         if (n % p == 0)
             n /= p;
         else
-   		p++;
+            p++;
     }
 
-	printf("%lu\n", p);
-	return (0);
+    printf("%lu\n", p);
+    return (0);
 }
